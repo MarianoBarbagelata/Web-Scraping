@@ -37,6 +37,7 @@ movies_series = []
 
 movies = driver.find_elements(By.CLASS_NAME, 'grid-item')
 for movie in movies:
+    time.sleep(1)
     more_info = driver.find_element(By.XPATH, '//*[@id="subview-container"]/starz-view-all/div/div/div/div/section[1]/virtual-scroller/div[2]/div['+str(j)+']/div['+str(i)+']/div/starz-content-item/article/div[1]/a[2]/span')
     time.sleep(1)
     more_info.click()
@@ -44,15 +45,15 @@ for movie in movies:
     if i == 7:
         i = 1
         j += 1
-    time.sleep(1)
+    time.sleep(2)
     title = driver.find_element(By.XPATH, '//*[@id="moviesDetailsH1"]').text
-    movies_series.append(print(f'Título: {title}'))
-    ano = driver.find_element(By.XPATH, '//*[@id="subview-container"]/starz-movie-details/div/div/section/div[1]/div[2]/section/ul/li[4]').text
-    movies_series.append(print(f'Año: {ano}'))
+    movies_series.append(title)
+    year = driver.find_element(By.XPATH, '//*[@id="subview-container"]/starz-movie-details/div/div/section/div[1]/div[2]/section/ul/li[4]').text
+    movies_series.append(year)
     duration = driver.find_element(By.XPATH, '//*[@id="subview-container"]/starz-movie-details/div/div/section/div[1]/div[2]/section/ul/li[2]').text
-    movies_series.append(print(f'Duración: {duration}'))
+    movies_series.append(duration)
     synopsis = driver.find_element(By.XPATH, '//*[@id="subview-container"]/starz-movie-details/div/div/section/div[1]/div[2]/div[1]/p').text
-    movies_series.append(print(f'Sinopsis: {synopsis}'))
+    movies_series.append(synopsis)
     driver.execute_script("window.history.go(-1)")
     time.sleep(1)
     if j == 24:
@@ -74,6 +75,7 @@ j = 1
 series = driver.find_elements(By.CLASS_NAME, 'grid-item')
 
 for serie in series:
+    time.sleep(1)
     more_info = driver.find_element(By.XPATH, '//*[@id="subview-container"]/starz-view-all/div/div/div/div/section[1]/virtual-scroller/div[2]/div['+str(j)+']/div['+str(i)+']/div/starz-content-item/article/div[1]/a[2]/span')
     time.sleep(1)
     more_info.click()
@@ -81,20 +83,19 @@ for serie in series:
     if i == 7:
         i = 1
         j += 1
-    time.sleep(1)
+    time.sleep(3)
     title = driver.find_element(By.XPATH, '//*[@id="seriesDetailsH1"]').text
-    movies_series.append(print(f'Título: {title}'))
+    movies_series.append(title)
     year = driver.find_element(By.XPATH, '//*[@id="subview-container"]/starz-series-details/div[1]/section/div[1]/div[2]/ul/li[4]').text
-    movies_series.append(print(f'Año: {year}'))
+    movies_series.append(year)
     episodes = driver.find_element(By.XPATH, '//*[@id="subview-container"]/starz-series-details/div[1]/section/div[1]/div[2]/ul/li[2]').text
-    movies_series.append(print(f'Episodios: {episodes}'))
+    movies_series.append(episodes)
     synopsis = driver.find_element(By.XPATH, '//*[@id="subview-container"]/starz-series-details/div[1]/section/div[1]/div[2]/div[2]/p').text
-    movies_series.append(print(f'Sinopsis: {synopsis}'))
+    movies_series.append(synopsis)
     driver.execute_script("window.history.go(-1)")
     time.sleep(1)
-    if j == 24:
-        driver.execute_script("window.scrollTo(0, 4500)")
-        time.sleep(1)
+    if i == 5 and j == 12:
+        break
 
 driver.quit()
 
